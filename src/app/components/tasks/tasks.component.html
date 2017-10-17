@@ -18,22 +18,24 @@
     </div>
     <div class="col-6 col-md-4"></div>
 </div>
-<agm-map [latitude]="lat"
-         [longitude]="lng"
-         [zoom]="zoom"
-         [disableDefaultUI]="false"
-         (mapClick)="mapClicked($event)">
-    <agm-marker *ngFor="let m of markers"
-                (markerClick)="clickedMarker(m)"
-                [latitude]="m.lat" [longitude]="m.lng">
-        <agm-info-window>
-            {{m.name}}
-            {{m.owner.username}}
-            <a class="nav-link" routerLink="/task/{{m.id}}">visit Task : {{m.name}}</a>
-        </agm-info-window>
-    </agm-marker>
-</agm-map>
 <!-- TODO: hier sollte eine neue component eingeführt werden -->
+<div class="col-6 col-md-6">
+    <agm-map [latitude]="lat"
+             [longitude]="lng"
+             [zoom]="zoom"
+             [disableDefaultUI]="false"
+             (mapClick)="mapClicked($event)">
+        <agm-marker *ngFor="let m of markers"
+                    (markerClick)="clickedMarker(m)"
+                    [latitude]="m.lat" [longitude]="m.lng">
+            <agm-info-window>
+                {{m.name}}
+                {{m.owner.username}}
+                <a class="nav-link" routerLink="/task/{{m.id}}">visit Task : {{m.name}}</a>
+            </agm-info-window>
+        </agm-marker>
+    </agm-map>
+</div>
 <div *ngFor="let x of tasks" class="card inline-block margin-10px big-shadow" style="width: 20rem;">
     <a routerLink="/task/{{x.id}}">
         <img class="card-img-top" src="assets/img/example.jpg" alt="Card image cap">

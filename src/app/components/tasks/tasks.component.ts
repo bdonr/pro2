@@ -49,7 +49,7 @@ export class TasksComponent implements OnInit {
     }
 
 }
-interface marker{
+export interface marker{
     id:number;
     name?:string;
     lat:number;

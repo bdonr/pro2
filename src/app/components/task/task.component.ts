@@ -6,6 +6,7 @@ import {Params, ActivatedRoute} from "@angular/router";
 import {isUndefined} from "util";
 import {UserService} from "../../services/user/user.service";
 import {AuthService} from "../../services/auth/auth.service";
+import {marker} from "../tasks/tasks.component";
 
 @Component({
     selector: 'app-task',
@@ -19,7 +20,7 @@ export class TaskComponent implements OnInit {
     isAdmin:boolean;
     isOwn: boolean;
     isloggedin: boolean;
-
+    marker:marker;
     constructor(private authService: AuthService, private taskManager: TaskService, private userService: UserService, private activatedRoute: ActivatedRoute) {
         this.activatedRoute.params.subscribe((params: Params) => {
             if (!isUndefined(params.id)) {
@@ -32,7 +33,8 @@ export class TaskComponent implements OnInit {
                 if(authService.getCurrentUser().admin){
                     this.isAdmin=true;
                 }
-                console.log(this.task);
+                this.marker={id:this.task.id,name:this.task.name,lat:this.task.locale.lat,lng:this.task.locale.lng,owner:this.task.owner}
+                console.log(this.marker);
             }
         });
     }

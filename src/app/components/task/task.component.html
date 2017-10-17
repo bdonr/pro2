@@ -67,12 +67,16 @@
   </div>
   
   <div class="col-6 col-md-6">
-      <img src="assets/img/map.png" />
-      <div class="margin-10px">
-      <h4>
-        Address:
-      </h4>
-      <app-adress *ngIf="task.adress" [adress]="task.adress"></app-adress>
-    </div>
+    <agm-map [latitude]="marker.lat"
+             [longitude]="marker.lng"
+             [disableDefaultUI]="false">
+      <agm-marker
+                  [latitude]="marker.lat" [longitude]="marker.lng">
+        <agm-info-window>
+          {{marker.name}}
+          <a class="nav-link" routerLink="/task/{{marker.id}}">visit Task : {{marker.name}}</a>
+        </agm-info-window>
+      </agm-marker>
+    </agm-map>
   </div>
 </div>

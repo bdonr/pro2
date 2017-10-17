@@ -1,0 +1,38 @@
+.inline{
+  display: inline;
+}
+
+.inline-block{
+  display: inline-block;
+}
+
+.margin-10px{
+  margin: 10px;
+}
+
+.big-shadow{
+  box-shadow: 0 0 50px #BBB;
+}
+
+.card{
+  transition: 0.5s;
+}
+
+.card a{
+  text-decoration: none;
+}
+
+.user-link{
+  transition: 0.25s;
+}
+
+.user-link:hover{
+  cursor: pointer;
+  box-shadow: 0 0 20px #BBB;
+  transition: 0.25s;
+}
+
+.user-image{
+  width: 96px;
+  height: 96px;
+}

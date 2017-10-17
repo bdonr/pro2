@@ -1,0 +1,78 @@
+<div class="row margin-10px">
+  <div class="col-6 col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Description</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Images(3)</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Comments(5)</a>
+          </li>
+          <li *ngIf="isOwn || isAdmin" class="nav-item">
+            <a href="delete" class="nav-link disabled" href="#">Delete</a>
+          </li>
+          <li *ngIf="isOwn || isAdmin" class="nav-item">
+            <a href="edit" class="nav-link disabled" href="#">Edit</a>
+          </li>
+        </ul>
+      </div>
+      <div class="card-body">
+        <h4 class="card-title">{{task.name}}</h4>
+        <p class="card-text">
+          There is some litter behind the big tree.
+        </p>
+        <div class="margin-10px">
+          <h4 class="card-title inline">
+            Publisher
+          </h4>
+          <span class="badge badge-pill badge-info user-link">MrFix(+341)</span>
+        </div>
+        
+        <div class="margin-10px">
+          <h4 class="card-title inline">
+            Bounty
+          </h4>
+          <span class="badge badge-pill badge-info user-link">MrFix (5.00$)</span>
+          <span class="badge badge-pill badge-info user-link">SaveThePlanet (7.33$)</span>
+        </div>
+        
+        <!--<div *ngIf="task.owner">
+          <a routerLink="/profile/{{task.owner.id}}">/profile/{{task.owner.id}}</a>
+        </div>-->
+        
+        <!--
+        <h4 class="card-title">
+          users in group
+        </h4>
+        <div *ngFor="let user of task.users">
+          <a routerLink="/profile/{{user.id}}">/profile/{{user.id}}</a>
+        </div>-->
+        <div class="margin-10px">
+          <a href="#" class="btn btn-primary">
+            Mark as done
+          </a>
+          <a href="#" class="btn btn-primary">
+            Increase Bounty
+          </a>
+          <a href="#" class="btn btn-primary">
+            Payout
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-6 col-md-6">
+      <img src="assets/img/map.png" />
+      <div class="margin-10px">
+      <h4>
+        Address:
+      </h4>
+      <app-adress *ngIf="task.adress" [adress]="task.adress"></app-adress>
+    </div>
+  </div>
+</div>

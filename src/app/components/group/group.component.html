@@ -1,0 +1,15 @@
+<img src="{{src}}" class="user-image rounded-circle">
+<div class="card-body">
+  <h4 class="card-title">{{group.name}}</h4>
+
+  <p class="card-text">{{group.description}}</p>
+  <h6 class="card-subtitle mb-2 text-muted">users in this group</h6>
+  <div *ngFor="let x of group.users" class="card inline-block margin-10px big-shadow" style="width: 20rem;">
+    <a routerLink="/profile/{{x.id}}">
+      <img class="card-img-top user-image rounded-circle"  src="assets/img/lin.jpg" alt="Card image cap">
+      <div class="card-body">
+        <h4 class="card-title">{{x.username}}</h4>
+      </div>
+    </a>
+  </div>
+</div>

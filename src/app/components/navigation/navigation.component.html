@@ -1,0 +1,50 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+  <a class="navbar-brand" href="#">
+    <img src="assets/img/logo.png" width="auto" height="30" alt="">
+  </a>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li *ngIf="!isloggedin" class="nav-item">
+        <a class="nav-link" routerLink="/register">Register</a>
+      </li>
+      <li  *ngIf="isloggedin &&isAdmin " class="nav-item">
+        <a class="nav-link" routerLink="/admin">Adminstration</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/task">Tasks</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/profile">User</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/groups/">Groups</a>
+      </li>
+
+      <li *ngIf="isloggedin" class="nav-item">
+        <a *ngIf="isloggedin" class="nav-link" href (click)="logout()" >Logout ({{user.email}})</a>
+      </li>
+      <li *ngIf="!isloggedin" class="nav-item">
+        <a class="nav-link" routerLink="/login">Login</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!--
+TODO: Wozu wird das gebraucht?
+<nav>
+  <div *ngIf="user!=null">
+    {{user.email}}
+    {{user.password}}
+    {{user.email}}
+  </div>
+</nav>
+-->
+
+<div class="container-fluid">
+  <router-outlet></router-outlet>
+</div>

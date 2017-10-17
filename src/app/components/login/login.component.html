@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-6 col-md-4">
+  </div>
+  <div class="col-6 col-md-4">
+    <form>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input [(ngModel)]="email" name="email" type="email" class="form-control" id="email">
+        <div *ngIf="email?.invalid && (email?.dirty || email?.touched)"
+             class="alert alert-danger">
+            <div *ngIf="email?.errors.required">
+                Name is required.
+            </div>
+            <div *ngIf="email?.errors.minlength">
+                Name must be at least 4 characters long.
+            </div>
+        </div>
+
+        <label for="pwd">Password</label>
+        <input [(ngModel)]="pwd" name="pwd" type="password" class="form-control" id="pwd">
+        <button type="button" (click)="login()">Login</button>
+      </div>
+    </form>
+    <div class="margin-10px">
+      <h6><b>Example:</b> eMail: don@web.de Password: 1234</h6>
+    </div>
+  </div>
+  <div class="col-6 col-md-4">
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<div class="row">
+    <div class="col-6 col-md-4"></div>
+    <div class="col-6 col-md-4">
+        <form>
+            <div class="form-group">
+                <h1 for="search">Task</h1>
+                <input [(ngModel)]="search" name="search" (keydown)="onChange($event.target.value)"
+                       (keyup)="onChange($event.target.value)" type="name" class="form-control" id="name">
+                <!--
+                  <select name="singleSelect" ng-model="data.singleSelect">
+                      <option *ngFor="let course of objArray" [value]="course">{{ course.name }}({{course.id}})</option>
+                      {{course}}
+                  </select>
+                -->
+            </div>
+            <input type="submit" value="search"/>
+        </form>
+    </div>
+    <div class="col-6 col-md-4"></div>
+</div>
+<agm-map [latitude]="lat"
+         [longitude]="lng"
+         [zoom]="zoom"
+         [disableDefaultUI]="false"
+         (mapClick)="mapClicked($event)">
+    <agm-marker *ngFor="let m of markers"
+                (markerClick)="clickedMarker(m)"
+                [latitude]="m.lat" [longitude]="m.lng">
+        <agm-info-window>
+            {{m.name}}
+            {{m.owner.username}}
+            <a class="nav-link" routerLink="/task/{{m.id}}">visit Task : {{m.name}}</a>
+        </agm-info-window>
+    </agm-marker>
+</agm-map>
+<!-- TODO: hier sollte eine neue component eingeführt werden -->
+<div *ngFor="let x of tasks" class="card inline-block margin-10px big-shadow" style="width: 20rem;">
+    <a routerLink="/task/{{x.id}}">
+        <img class="card-img-top" src="assets/img/example.jpg" alt="Card image cap">
+        <div class="card-body">
+            <h4 class="card-title">{{x.name}}</h4>
+            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                content.</p>
+        </div>
+    </a>
+</div>

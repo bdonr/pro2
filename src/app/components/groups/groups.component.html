@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-6 col-md-4"></div>
+  <div class="col-6 col-md-4">
+    <form>
+      <div class="form-group">
+        <h1 for="search">Groups</h1>
+        <input  [(ngModel)]="search" name="search" (keydown)="onChange($event.target.value)"
+                (keyup)="onChange($event.target.value)" type="name" class="form-control" id="name" >
+      </div>
+      <input type="submit" value="search" />
+    </form>
+  </div>
+  <div class="col-6 col-md-4"></div>
+</div>
+
+<div *ngFor="let x of groups" class="card inline-block margin-10px big-shadow" style="width: 20rem;">
+  <a routerLink="/group/{{x.id}}">
+    <img class="card-img-top" src="assets/img/Community_2.png" alt="Card image cap">
+    <div class="card-body">
+      <h4 class="card-title">{{x.name}}</h4>
+      <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    </div>
+  </a>
+</div>

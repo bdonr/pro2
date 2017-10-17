@@ -36,11 +36,11 @@ export class TasksComponent implements OnInit {
 
     setTasks() {
         this.input.subscribe(()=>{
+            this.markers = [];
             this.tasks = this.taskservice.findByName(this.search);
             for (let entry of this.tasks) {
                 this.markers.push({id:entry.id,name:entry.name,lat:entry.locale.lat,lng:entry.locale.lng,owner:entry.owner})
             }
-            console.log("marker",this.markers);
         });
     }
 

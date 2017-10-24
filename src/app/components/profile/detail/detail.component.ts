@@ -10,16 +10,21 @@ import {isUndefined} from "util";
   styleUrls: ['./detail.component.css']
 })
 export class DetailComponent implements OnInit {
-  id:number;
+  id:string;
   @Input() user:User;
   src:any;
 
   constructor(private userService:UserService,private activatedRoute:ActivatedRoute) {
     this.src = "assets/img/lin.jpg";
+
     this.activatedRoute.params.subscribe((params: Params) => {
       if (!isUndefined(params.id)) {
         this.id = params.id;
-        this.user = this.userService.findUserById(this.id);
+       this.userService.findUserById(this.id).subscribe(data=>{
+         this.user=data[0];
+         console.log(this.user);
+       });
+
       }
     });
   }

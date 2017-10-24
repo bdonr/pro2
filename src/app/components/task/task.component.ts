@@ -27,7 +27,7 @@ export class TaskComponent implements OnInit {
                 this.id = params.id;
                 this.task = this.taskManager.findById(this.id);
                 console.log(this.task);
-                if (this.task.owner.id == authService.getCurrentUser().id) {
+                if (this.task.owner== authService.getCurrentUser()) {
                     this.isOwn = true;
                 }
                 if(authService.getCurrentUser().admin){

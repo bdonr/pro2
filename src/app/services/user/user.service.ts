@@ -2,70 +2,70 @@ import {Injectable} from '@angular/core';
 import {User} from "../../components/entities/User";
 import {BehaviorSubject, Observable, Observer, Subject} from "rxjs";
 import {debounceTime} from "rxjs/operator/debounceTime";
-import {Http} from "@angular/http";
+import {Http, RequestOptions} from "@angular/http";
 import 'rxjs/add/operator/map'
 import {AuthService} from "../auth/auth.service";
+import {ObjectId} from "../../components/entities/ObjectId";
 
 
 @Injectable()
 export class UserService {
     users: User[];
+    user: User;
+    adr:string = 'http://192.168.178.24/rest';
 
-    constructor() {
+    constructor(public http: Http) {
         console.log("erstekkt");
     }
 
     getAllUser(): Observable<User[]> {
-        return Observable.of(this.getUsers());
+        return this.getUsers();
     }
 
-    findUserById(id: number): User {
-        return this.getUsers().find(profile => profile.id == id);
+    findUserById(id: string) {
+            return this.http.get(this.adr+'/user/id/'+id).map(res=>res.json());
+    }
+    findUserByName(name:string){
+        console.log(this.http.get(this.adr+'/search/'+name));
+        return this.http.get(this.adr+'/user/search/'+name).map(res=>res.json());
+
     }
 
-    findUserByEmail(email: string): User {
-        return this.getUsers().find(profile => profile.email ==email);
+    findUserByEmail(email: string) {
+
+        console.log("email", email);
+        this.getUsers().subscribe(users => {
+            this.user = users.find(profile => profile.email == email);
+            console.log("jhgj", this.user);
+        });
     }
 
 
-
-    findUserByEmailandPassword(email: string, password:string): User {
-        let user = this.findUserByEmail(email);
-        if(user.pwd === password){
-            return user;
+    findUserByEmailandPassword(email: string, password: string): User {
+        this.findUserByEmail(email);
+        console.log("user", this.user);
+        if (this.user.pwd === password) {
+            return this.user;
         }
         return null;
 
     }
 
 
-    findUsersByUsername(name: string): User[] {
-        return this.getUsers().filter(profile => profile.username.match("^"+name));
+
+    getUsers() {
+        return this.http.get(this.adr+'/user/').map(res=>res.json());
     }
 
-    getUsers(): User[] {
-        if (this.users == null) {
-            this.users = [
-                new User("strubbel",1,"don@web.de", "1234", true,null),
-                new User("daviel",2,"don1@web.de", "1234", false,null),
-                new User("don",3,"don2@web.de", "1234", false,null),
-                new User("ktja1234",4,"don3@web.de", "1234", true,null),
-                new User("nikolai123",5,"don4@web.de", "1234", false,null),
-                new User("katja",6,"don5@web.de", "1234", false,null),
-                new User("karl",7,"don6@web.de", "1234", false,null)
-            ];
-        }
-        return this.users;
+    addUser(user:User): Observable<User[]> {
+        return this.http.put(this.adr+'/user/', user).map(r => r.json());
     }
 
-    addUser(user: User): Observable<User[]> {
-        this.getUsers().push(user);
-        return Observable.of(this.getUsers());
-    }
+
 
     /**
      getUsers2() {
-        return this.http.get('https://jsonplaceholder.typicode.com/users').map(res => res.json());
+        return this.http.get('https://192.168.178.24/user').map(res => res.json());
     }
 
      setUser(user:User) {

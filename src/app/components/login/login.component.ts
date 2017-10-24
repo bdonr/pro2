@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.email,this.pwd);
     if(this.authService.getCurrentUser()!=null){
       console.log("re");
-      this.router.navigate(['/profile/'+this.authService.getCurrentUser().id]);
+      this.router.navigate(['/profile/'+this.authService.getCurrentUser()._id]);
     }
   }
   ngOnInit() {

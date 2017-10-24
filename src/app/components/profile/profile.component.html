@@ -4,17 +4,18 @@
         <form>
             <div class="form-group">
                 <h1 for="search">User</h1>
-                <input  [(ngModel)]="search" name="search" (keydown)="onChange($event.target.value)"
-                        (keyup)="onChange($event.target.value)" type="name" class="form-control" id="name" >
+                <input  [(ngModel)]="search" name="search" (keydown)="setProfile()"
+                        (keyup)="setProfile()" type="name" class="form-control" id="name" >
             </div>
             <input type="submit" value="search" />
         </form>
     </div>
     <div class="col-6 col-md-4"></div>
 </div>
-
+{{error}}
+<div class="row" ng-if="users.length >0" >
 <div *ngFor="let x of users" class="card inline-block margin-10px big-shadow" style="width: 20rem;">
-    <a routerLink="/profile/{{x.id}}">
+    <a routerLink="/profile/{{x?._id.$oid}}">
         <img class="card-img-top" src="assets/img/lin.jpg" alt="Card image cap">
         <div class="card-body">
             <h4 class="card-title">{{x.username}}</h4>
@@ -22,4 +23,5 @@
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
         </div>
     </a>
+</div>
 </div>

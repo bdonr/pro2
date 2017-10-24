@@ -1,6 +1,7 @@
 
 import {Task} from "./Task";
+import {ObjectId} from "./ObjectId";
 export class User{
 
-    constructor(public username:string ,public id:number,public email:string,public pwd:string,public admin:boolean,public tasks:Task[]){}
+    constructor(public _id:string,public name:string ,public email:string,public pwd:string,public admin:boolean,public tasks:Task[]){}
 }

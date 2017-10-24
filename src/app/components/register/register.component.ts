@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
   }
 
   addUser(){
-    this.user = new User("",8,this.email,this.password,false,null);
+    this.user = new User("","name",this.email,this.password,false,null);
     this.userservice.addUser(this.user).subscribe(users=>{
         this.users = users;
     });

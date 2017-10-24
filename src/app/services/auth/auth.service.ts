@@ -55,6 +55,7 @@ export class AuthService {
 
 
   login(email: string, pwd: string) {
+    console.log(email,pwd);
     let user = this.userService.findUserByEmailandPassword(email,pwd);
     console.log(user);
     if (user !==null) {

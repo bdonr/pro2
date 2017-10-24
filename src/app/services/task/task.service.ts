@@ -30,14 +30,6 @@ export class TaskService {
   }
 
   public  getTasks(){
-    if(TaskService.tasks==null){
-
-      TaskService.tasks=[new Task(1,"bad littering",new Locale(52.128371, 9.986716),[this.userService.findUserById(1)],this.userService.findUserById(1)),
-          new Task(2,"baseball",new Locale(52.132398, 9.977249),[this.userService.findUserById(1)],this.userService.findUserById(1)),
-          new Task(3,"garten",new Locale(52.132978, 9.972260),[this.userService.findUserById(2),this.userService.findUserById(1)],this.userService.findUserById(2)),
-          new Task(3,"schiff",new Locale(52.147408, 9.938396),[this.userService.findUserById(2)],this.userService.findUserById(2)),
-          new Task(4,"queens crown",new Locale(52.185773, 10.158653),[this.userService.findUserById(5)],this.userService.findUserById(5))];
-    }
       console.log(TaskService.tasks);
     return TaskService.tasks;
   }

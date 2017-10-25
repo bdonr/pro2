@@ -10,9 +10,10 @@ import {User} from "../entities/User";
 export class RegisterComponent implements OnInit {
   user:User;
   users:User[];
-  email:string;
-  password:string;
-  username:string;
+  email:string="";
+  password:string="";
+  name:string="";
+  emailerror:string;
   constructor(private userservice: UserService) {
     this.userservice.getAllUser().subscribe(users=>{
       this.users=users;
@@ -26,6 +27,25 @@ export class RegisterComponent implements OnInit {
         this.users = users;
     });
   }
+
+    searchemail(){
+      this.userservice.findUserByEmail(this.email.toLowerCase()).subscribe(data=>{
+          if(data[0]){
+            this.emailerror=data[0].errDesc;
+          }
+          else{ this.emailerror="OK";
+          }
+      })
+  }
+
+
+    searchuser(){
+        this.userservice.findUserByName(this.name).subscribe(data=>{
+          if(data) {
+            console.log(data.errDesc);
+          }
+        })
+    }
 
 
 

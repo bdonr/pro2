@@ -21,6 +21,7 @@ export class DetailComponent implements OnInit {
       if (!isUndefined(params.id)) {
         this.id = params.id;
        this.userService.findUserById(this.id).subscribe(data=>{
+         console.log(data,this.id);
          this.user=data[0];
          console.log(this.user);
        });

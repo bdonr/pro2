@@ -16,6 +16,8 @@ export class LoginComponent implements OnInit {
 
 
   login(){
+    let c =this.userservice.findUserByEmail(this.email);
+
     this.authService.login(this.email,this.pwd);
     if(this.authService.getCurrentUser()!=null){
       console.log("re");

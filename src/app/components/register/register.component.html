@@ -4,16 +4,31 @@
     <form>
         <div class="form-group">
             <label for="email">Email-Adresse</label>
-            <input [(ngModel)]="email" name="email" type="email" class="form-control" id="email">
+            <input [(ngModel)]="email" minlength="5" maxlength="30" (keyup)="searchemail()" (keydown)="searchemail()" name="email" type="email" class="form-control" id="email">
+            <div ng-if="(email.dirty || email.touched) && email.errors" class="alert alert-danger">
+                <div [hidden]="!email.errors?.required">
+                    email is required!
+                </div>
+                <div [hidden]="!email.errors?.minlength">
+                    email must be at least 5 characters long.
+                </div>
+                <div [hidden]="!email.errors?.maxlength">
+                    email cannot be more than 30 characters long.
+                </div>
+            </div>
         </div>
         <div class="form-group">
             <label for="pwd">Passwort</label>
-            <input [(ngModel)]="password" name="password" type="password" class="form-control" id="pwd">
+            <input [(ngModel)]="password" name="password"  type="password" class="form-control" id="pwd">
+        </div>
+        <div class="form-group">
+            <label for="pwd">Username</label>
+            <input minlength="5" maxlength="30" [(ngModel)]="name " name="name" (keyup)="searchuser()" (keydown)="searchuser()" type="name" class="form-control" id="name">
         </div>
 
         <button type="button" (click)="addUser()">Register</button>
     </form>
-
+{{emailerror}}
     <!--<div *ngFor="let g of users ">
         {{g?.email}}
     </div>-->

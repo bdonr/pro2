@@ -2,13 +2,15 @@ import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {User} from "../../components/entities/User";
 import {UserService} from "../user/user.service";
+import {Http, RequestOptions} from "@angular/http";
+
 
 @Injectable()
 export class AuthService {
   isLoginObserv=new BehaviorSubject<boolean>(this.hasToken());
   isAdminObserv=new BehaviorSubject<boolean>(this.hasAdminToken());
   user:User;
-  constructor(private userService:UserService) { }
+  constructor(private userService:UserService,http:Http) { }
 
   private hasToken() : boolean {
     console.log("token?"+!!localStorage.getItem('currentuser'));
@@ -55,16 +57,20 @@ export class AuthService {
 
 
   login(email: string, pwd: string) {
-    console.log(email,pwd);
-    let user = this.userService.findUserByEmailandPassword(email,pwd);
-    console.log(user);
-    if (user !==null) {
-      localStorage.setItem("currentuser", JSON.stringify(user));
-      console.log("local"+localStorage.getItem("currentuser"));
-      this.user= JSON.parse(localStorage.getItem("currentuser"));
-      this.isAdminObserv.next(user.admin);
-      this.isLoginObserv.next(true);
-    }
+    this.userService.findUserByEmail(email).subscribe(data=>{
+      this.user=data;
+      this.user.pwd=pwd;
+    });
+    this.userService.login(this.user).subscribe(data=>{
+      console.log(data);
+      if(data[0]){
+        console.log(data[0].err);
+      }
+      else{
+        console.log("OK")
+      }
+    });
+
   }
 
 

@@ -12,7 +12,7 @@ import {ObjectId} from "../../components/entities/ObjectId";
 export class UserService {
     users: User[];
     user: User;
-    adr:string = 'http://192.168.178.24/rest';
+    adr:string = 'http://localhost/rest';
 
     constructor(public http: Http) {
         console.log("erstekkt");
@@ -23,32 +23,31 @@ export class UserService {
     }
 
     findUserById(id: string) {
+        
             return this.http.get(this.adr+'/user/id/'+id).map(res=>res.json());
     }
     findUserByName(name:string){
-        console.log(this.http.get(this.adr+'/search/'+name));
+
         return this.http.get(this.adr+'/user/search/'+name).map(res=>res.json());
 
     }
 
     findUserByEmail(email: string) {
-
-        console.log("email", email);
-        this.getUsers().subscribe(users => {
-            this.user = users.find(profile => profile.email == email);
-            console.log("jhgj", this.user);
-        });
+        return this.http.get(this.adr+'/user/email/'+email).map(res=> res.json());
     }
 
 
-    findUserByEmailandPassword(email: string, password: string): User {
-        this.findUserByEmail(email);
-        console.log("user", this.user);
-        if (this.user.pwd === password) {
-            return this.user;
-        }
-        return null;
+    findUserByUsername(username: string) {
+        return this.http.get(this.adr+'/user/name/'+username).map(res=>res.json());
+    }
 
+
+    register(user:User) {
+        return this.http.put(this.adr+'user',user);
+    }
+
+    login(user:User){
+        return this.http.get(this.adr+'login',user);
     }
 
 

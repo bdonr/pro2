@@ -15,7 +15,7 @@
 {{error}}
 <div class="row" ng-if="users.length >0" >
 <div *ngFor="let x of users" class="card inline-block margin-10px big-shadow" style="width: 20rem;">
-    <a routerLink="/profile/{{x?._id.$oid}}">
+    <a routerLink="/profile/{{x?._id}}">
         <img class="card-img-top" src="assets/img/lin.jpg" alt="Card image cap">
         <div class="card-body">
             <h4 class="card-title">{{x.username}}</h4>

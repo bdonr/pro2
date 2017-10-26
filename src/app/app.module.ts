@@ -31,6 +31,7 @@ import { GroupsComponent } from './components/groups/groups.component';
 import { GroupComponent } from './components/group/group.component';
 import {GroupService} from "./services/group/group.service";
 import { AgmCoreModule } from '@agm/core';
+import { CreateComponent } from './components/task/create/create.component';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import { AgmCoreModule } from '@agm/core';
     EdittaskComponent,
     GroupsComponent,
     GroupComponent,
+    CreateComponent,
 
   ],
   imports: [
@@ -77,6 +79,7 @@ import { AgmCoreModule } from '@agm/core';
       {path:'admin',component:AdminComponent},
       {path:'task',component:TasksComponent},
       {path:'task/edit/:id',component:EdittaskComponent},
+      {path:'task/create',component:CreateComponent},
       {path:'task/:id',component:TaskComponent},
       {path:'groups',component:GroupsComponent},
       {path:'group/:id',component:GroupComponent},

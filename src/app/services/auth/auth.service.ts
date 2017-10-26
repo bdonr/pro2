@@ -1,79 +1,71 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {User} from "../../components/entities/User";
 import {UserService} from "../user/user.service";
 import {Http, RequestOptions} from "@angular/http";
+import {Login} from "../../components/entities/Login";
+import {Login2} from "../../components/entities/Login2";
 
 
 @Injectable()
 export class AuthService {
-  isLoginObserv=new BehaviorSubject<boolean>(this.hasToken());
-  isAdminObserv=new BehaviorSubject<boolean>(this.hasAdminToken());
-  user:User;
-  constructor(private userService:UserService,http:Http) { }
+    isLoginObserv = new BehaviorSubject<boolean>(this.hasToken());
+    isAdminObserv = new BehaviorSubject<boolean>(this.hasAdminToken());
+    user: User;
 
-  private hasToken() : boolean {
-    console.log("token?"+!!localStorage.getItem('currentuser'));
-    return !!localStorage.getItem('currentuser');
-  }
-  private hasAdminToken() : boolean {
-    if(this.hasToken()) {
-      return JSON.parse(localStorage.getItem('currentuser')).admin;
+    constructor(private userService: UserService, http: Http) {
     }
-    return false;
-  }
 
-  isLoggedin():Observable<boolean>{
-    return this.isLoginObserv.asObservable();
-  }
-
-
-  isAdmin():Observable<boolean>{
-    return this.isAdminObserv.asObservable();
-  }
-
-  setCurrent(user:User){
-    if(this.user==null){
-      localStorage.setItem("current",JSON.stringify(user));
+    private hasToken(): boolean {
+        console.log("token?" + !!localStorage.getItem('currentuser'));
+        return !!localStorage.getItem('currentuser');
     }
-  }
 
-  getCurrentUser(): User {
-    if (localStorage.getItem("currentuser") != null) {
-      return JSON.parse(localStorage.getItem("currentuser"));
+    private hasAdminToken(): boolean {
+        if (this.hasToken()) {
+            return JSON.parse(localStorage.getItem('currentuser')).admin;
+        }
+        return false;
     }
-    console.log(localStorage.getItem("currentuser"));
-    return null;
-  }
+
+    isLoggedin(): Observable<boolean> {
+        return this.isLoginObserv.asObservable();
+    }
 
 
-  logout() {
-    localStorage.removeItem("currentuser");
-    console.log(localStorage.getItem("currentuser"));
-    this.user=null;
-    this.isAdminObserv.next(false);
-    this.isLoginObserv.next(false);
-  }
+    isAdmin(): Observable<boolean> {
+        return this.isAdminObserv.asObservable();
+    }
+
+    setCurrent(user: User) {
+        if (this.user == null) {
+            localStorage.setItem("current", JSON.stringify(user));
+        }
+    }
+
+    getCurrentUser(): User {
+        if (localStorage.getItem("currentuser") != null) {
+            return JSON.parse(localStorage.getItem("currentuser"));
+        }
+        console.log(localStorage.getItem("currentuser"));
+        return null;
+    }
 
 
-  login(email: string, pwd: string) {
-    this.userService.findUserByEmail(email).subscribe(data=>{
-      this.user=data;
-      this.user.pwd=pwd;
-    });
-    this.userService.login(this.user).subscribe(data=>{
-      console.log(data);
-      if(data[0]){
-        console.log(data[0].err);
-      }
-      else{
-        console.log("OK")
-      }
-    });
+    logout() {
+        localStorage.removeItem("currentuser");
+        console.log(localStorage.getItem("currentuser"));
+        this.user = null;
+        this.isAdminObserv.next(false);
+        this.isLoginObserv.next(false);
+    }
 
-  }
-
-
+    //public _id:string,public name:string ,public email:string,public password:string,public admin:boolean,public tasks:Task[]
+    login(login:Login,login2:Login2) {
+        this.userService.login(login).subscribe(data => {
+            console.log(data);
+        });
+    }
 
 
 }

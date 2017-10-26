@@ -5,5 +5,5 @@ import {User} from "./User";
 export class Task{
 
 
-    constructor(public id:number,public name:string,public locale:Locale,public users:User[],public owner:User){}
+    constructor(public _id:string,public name:string,public locale:Locale,public users:User[],public owner:User){}
 }

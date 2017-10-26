@@ -21,7 +21,7 @@
         </ul>
       </div>
       <div class="card-body">
-        <h4 class="card-title">{{task.name}}</h4>
+        <h4 class="card-title">{{task?.name}}</h4>
         <p class="card-text">
           There is some litter behind the big tree.
         </p>
@@ -67,14 +67,14 @@
   </div>
   
   <div class="col-6 col-md-6">
-    <agm-map [latitude]="marker.lat"
-             [longitude]="marker.lng"
+    <agm-map [latitude]="marker?.lat"
+             [longitude]="marker?.lng"
              [disableDefaultUI]="false">
       <agm-marker
-                  [latitude]="marker.lat" [longitude]="marker.lng">
+                  [latitude]="marker?.lat" [longitude]="marker?.lng">
         <agm-info-window>
-          {{marker.name}}
-          <a class="nav-link" routerLink="/task/{{marker.id}}">visit Task : {{marker.name}}</a>
+          {{marker?.name}}
+          <a class="nav-link" routerLink="/task/{{marker?.id}}">visit Task : {{marker?.name}}</a>
         </agm-info-window>
       </agm-marker>
     </agm-map>

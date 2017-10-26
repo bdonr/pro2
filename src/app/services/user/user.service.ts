@@ -6,13 +6,15 @@ import {Http, RequestOptions} from "@angular/http";
 import 'rxjs/add/operator/map'
 import {AuthService} from "../auth/auth.service";
 import {ObjectId} from "../../components/entities/ObjectId";
+import {Login} from "../../components/entities/Login";
+import {Login2} from "../../components/entities/Login2";
 
 
 @Injectable()
 export class UserService {
     users: User[];
     user: User;
-    adr:string = 'http://localhost/rest';
+    adr:string = 'http://192.168.178.100/rest';
 
     constructor(public http: Http) {
         console.log("erstekkt");
@@ -23,11 +25,9 @@ export class UserService {
     }
 
     findUserById(id: string) {
-        
             return this.http.get(this.adr+'/user/id/'+id).map(res=>res.json());
     }
     findUserByName(name:string){
-
         return this.http.get(this.adr+'/user/search/'+name).map(res=>res.json());
 
     }
@@ -43,11 +43,16 @@ export class UserService {
 
 
     register(user:User) {
-        return this.http.put(this.adr+'user',user);
+        return this.http.put(this.adr+'/user/',user).map(res=>res.json());
     }
 
-    login(user:User){
-        return this.http.get(this.adr+'login',user);
+    login(user:Login){
+        console.log(user);
+        return this.http.put(this.adr+'/login',user);
+    }
+    login2(user2:Login2){
+        console.log(user2);
+        return this.http.put(this.adr+'/login',user2);
     }
 
 

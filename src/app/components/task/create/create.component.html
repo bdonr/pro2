@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-6 col-md-4">
+  </div>
+  <div class="col-6 col-md-4">
+    <form>
+      <div class="form-group">
+        <label for="name">Name of Your Task</label>
+        <input [(ngModel)]="name" name="name" type="name" class="form-control" id="name">
+
+        <label for="description">Description</label>
+        <input [(ngModel)]="description" name="description" type="description" class="form-control" id="description">
+
+
+        <label for="lat">lat</label>
+        <input [(ngModel)]="lat" name="lat" type="lat" class="form-control" id="lat">
+
+
+        <label for="lng">lat</label>
+        <input [(ngModel)]="lng" name="lng" type="lng" class="form-control" id="lng">
+
+        <button type="button" (click)="send()">Login</button>
+      </div>
+    </form>
+  </div>
+  <div class="col-6 col-md-4">
+  </div>
+</div>

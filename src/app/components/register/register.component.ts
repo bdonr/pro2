@@ -14,6 +14,7 @@ export class RegisterComponent implements OnInit {
   password:string="";
   name:string="";
   emailerror:string;
+  date:any;
   constructor(private userservice: UserService) {
     this.userservice.getAllUser().subscribe(users=>{
       this.users=users;
@@ -22,9 +23,11 @@ export class RegisterComponent implements OnInit {
   }
 
   addUser(){
-    this.user = new User("","name",this.email,this.password,false,null);
-    this.userservice.addUser(this.user).subscribe(users=>{
-        this.users = users;
+    this.user = new User("",this.name,this.email,this.password,false,null);
+    console.log(this.user);
+    console.log(this.date);
+    this.userservice.register(this.user).subscribe(users=>{
+        console.log(users);
     });
   }
 
@@ -41,7 +44,7 @@ export class RegisterComponent implements OnInit {
 
     searchuser(){
         this.userservice.findUserByName(this.name).subscribe(data=>{
-          if(data) {
+          if(data[0]) {
             console.log(data.errDesc);
           }
         })

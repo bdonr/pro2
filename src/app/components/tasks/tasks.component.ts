@@ -14,32 +14,39 @@ import {User} from "../entities/User";
 export class TasksComponent implements OnInit {
 
     title: string = 'My first AGM project';
-    zoom : number=10;
+    zoom: number = 10;
     lat: number = 52.128371;
     lng: number = 9.986716;
 
-    markers:marker[]=[];
-    tasks: Task[]=[];
+    markers: marker[] = [];
+    tasks: Task[] = [];
     input = new Subject();
-    search:string;
+    search: string;
+
     constructor(private taskservice: TaskService, private adressService: AdressService) {
         this.setTasks();
-
-
-
     }
 
-    onChange(e:string) {
+    onChange(e: string) {
         this.input.next(e);
     }
 
 
     setTasks() {
-        this.input.subscribe(()=>{
+        this.input.subscribe(() => {
             this.markers = [];
-            this.tasks = this.taskservice.findByName(this.search);
+            this.taskservice.findByName(this.search).subscribe(data => {
+                console.log(data);
+                this.tasks = data;
+            });
             for (let entry of this.tasks) {
-                this.markers.push({id:entry.id,name:entry.name,lat:entry.locale.lat,lng:entry.locale.lng,owner:entry.owner})
+                this.markers.push({
+                    id: entry._id,
+                    name: entry.name,
+                    lat: entry.locale.lat,
+                    lng: entry.locale.lng,
+                    owner: entry.owner
+                })
             }
         });
     }
@@ -49,11 +56,11 @@ export class TasksComponent implements OnInit {
     }
 
 }
-export interface marker{
-    id:number;
-    name?:string;
-    lat:number;
-    lng:number;
-    owner:User;
+export interface marker {
+    id: string;
+    name?: string;
+    lat: number;
+    lng: number;
+    owner: User;
 }
 

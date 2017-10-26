@@ -31,13 +31,13 @@
             <agm-info-window>
                 {{m.name}}
                 {{m.owner.username}}
-                <a class="nav-link" routerLink="/task/{{m.id}}">visit Task : {{m.name}}</a>
+                <a class="nav-link" routerLink="/task/{{m._id}}">visit Task : {{m.name}}</a>
             </agm-info-window>
         </agm-marker>
     </agm-map>
 </div>
 <div *ngFor="let x of tasks" class="card inline-block margin-10px big-shadow" style="width: 20rem;">
-    <a routerLink="/task/{{x.id}}">
+    <a routerLink="/task/{{x._id}}">
         <img class="card-img-top" src="assets/img/example.jpg" alt="Card image cap">
         <div class="card-body">
             <h4 class="card-title">{{x.name}}</h4>
